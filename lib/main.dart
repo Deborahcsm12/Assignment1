@@ -40,180 +40,171 @@ class ProfileScreen extends StatelessWidget {
     final formattedDate =
         DateFormat("MMMM yyyy").format(student.enrollmentDate);
 
-    final screenWidth = MediaQuery.of(context).size.width;
-
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color(0xFFE3F2FD),
-                Color(0xFFFCE4EC),
-              ],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFFE3F2FD),
+              Color(0xFFFCE4EC),
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
           ),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-
-                const SizedBox(height: 20),
-
-                Text(
-                  "Student Dashboard",
-                  style: GoogleFonts.poppins(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1.2,
+        ),
+        child: SafeArea(
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              return SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minHeight: constraints.maxHeight,
                   ),
-                ),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
 
-                const SizedBox(height: 30),
+                          // Profile Card (Baby Blue)
+                          Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.all(20),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFBDE3FF),
+                              borderRadius: BorderRadius.circular(25),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black12,
+                                  blurRadius: 10,
+                                  offset: Offset(0, 6),
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(60),
+                                  child: Image.asset(
+                                    "assets/profile.jpeg",
+                                    height: 110,
+                                    width: 110,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                const SizedBox(height: 15),
+                                Text(
+                                  student.name,
+                                  style: const TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 1.2,
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  "Major: ${student.major}",
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                const SizedBox(height: 5),
+                                Text(
+                                  "Enrollment Date: $formattedDate",
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
 
-                // ================= PROFILE CARD =================
-                Container(
-                  width: screenWidth * 0.9,
-                  padding: const EdgeInsets.all(25),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF81C7E3),
-                    borderRadius: BorderRadius.circular(30),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Colors.black26,
-                        blurRadius: 15,
-                        offset: Offset(0, 8),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    children: [
+                          const SizedBox(height: 25),
 
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(80),
-                        child: Image.asset(
-                          "assets/profile.jpeg",
-                          height: 130,
-                          width: 130,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+                          // About Card
+                          Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.all(20),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFECECEC),
+                              borderRadius: BorderRadius.circular(25),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black12,
+                                  blurRadius: 10,
+                                  offset: Offset(0, 6),
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              children: [
+                                const Text(
+                                  "About Me",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                    letterSpacing: 1,
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                Text(
+                                  student.about,
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
+                          ),
 
-                      const SizedBox(height: 20),
+                          const SizedBox(height: 25),
 
-                      Text(
-                        student.name,
-                        style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 1.3,
-                        ),
-                      ),
+                          // Hobbies Card
+                          Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.all(20),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFECECEC),
+                              borderRadius: BorderRadius.circular(25),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black12,
+                                  blurRadius: 10,
+                                  offset: Offset(0, 6),
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              children: const [
+                                Text(
+                                  "Hobbies",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                    letterSpacing: 1,
+                                  ),
+                                ),
+                                SizedBox(height: 15),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Icon(Icons.camera_alt, size: 28),
+                                    Icon(Icons.brush, size: 28),
+                                    Icon(Icons.restaurant, size: 28),
+                                    Icon(Icons.music_note, size: 28),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
 
-                      const SizedBox(height: 10),
-
-                      Text(
-                        "Major: ${student.major}",
-                        style: const TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-
-                      const SizedBox(height: 6),
-
-                      Text(
-                        "Enrollment Date: $formattedDate",
-                        style: const TextStyle(
-                          fontSize: 15,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                const SizedBox(height: 30),
-
-                // ================= ABOUT CARD =================
-                Container(
-                  width: screenWidth * 0.9,
-                  padding: const EdgeInsets.all(25),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFECECEC),
-                    borderRadius: BorderRadius.circular(30),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 10,
-                        offset: Offset(0, 6),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    children: [
-                      const Text(
-                        "About Me",
-                        style: TextStyle(
-                          fontSize: 19,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 1,
-                        ),
-                      ),
-                      const SizedBox(height: 15),
-                      Text(
-                        student.about,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(fontSize: 15),
-                      ),
-                    ],
-                  ),
-                ),
-
-                const SizedBox(height: 30),
-
-                // ================= HOBBIES CARD =================
-                Container(
-                  width: screenWidth * 0.9,
-                  padding: const EdgeInsets.all(25),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFECECEC),
-                    borderRadius: BorderRadius.circular(30),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 10,
-                        offset: Offset(0, 6),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    children: [
-                      const Text(
-                        "Hobbies",
-                        style: TextStyle(
-                          fontSize: 19,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 1,
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: const [
-                          Icon(Icons.camera_alt, size: 32),
-                          Icon(Icons.brush, size: 32),
-                          Icon(Icons.restaurant, size: 32),
-                          Icon(Icons.music_note, size: 32),
                         ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
-
-                const SizedBox(height: 40),
-              ],
-            ),
+              );
+            },
           ),
         ),
       ),
